@@ -1,0 +1,19 @@
+{%extends 'main.html'%}
+{%block content%}
+    {%if page == 'delete_card'%}
+        <p>Are you sure you want to delete {{productObj.title}}?</p>
+    
+        <form action="{% url 'delete-card' productObj.id %}" method="POST">
+            {%csrf_token%}
+            <button type="submit" method="POST" class="btn btn-secondary">Delete</button>
+        </form>
+    
+
+    {%else%}
+        <p>Are you sure you want to delete {{orderItem.product.title}}?</p>
+        <form action="{% url 'delete-orderItem' orderItem.id %}" method="POST">
+            {%csrf_token%}
+            <button type="submit" method="POST" class="btn btn-secondary">Delete</button>
+        </form>
+    {%endif%}
+{%endblock%}

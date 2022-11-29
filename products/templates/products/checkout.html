@@ -1,0 +1,16 @@
+{%extends 'main.html'%}
+
+{%block content%}
+    {%if shippingAddress%}
+        <p>Shipping Address:</p>
+        <p>Address: {{shippingAddress.address}}</p>
+        <p>Postal Code: {{shippingAddress.postal_code}}</p>
+        <p>Phone: {{shippingAddress.phone}}</p>
+    {%else%}
+        <a href="">Add Shipping Address</a>
+    {%endif%}
+
+    <h5>Total</h5>
+    <p>Total amount: {{order.get_price_total}}</p>
+    <p>Total quantity: {{order.get_qty_total}}</p>
+{%endblock%}

@@ -1,0 +1,41 @@
+{%extends 'main.html'%}
+
+{%block content%}
+    {% for item in orderItems %}
+        <h5>Product:{{item.product}}</h5>
+        <p>Price: {{item.product.price}}</p>
+
+        <p>Quantity: {{item.quantity}}</p>
+
+        {%if item.shoe_size.all%}
+            {%for size in item.shoe_size.all%}
+                <p>Size:{{size}}</p>
+            {%endfor%}
+        {%endif%}
+
+        {%if item.cloth_size.all%}
+            {%for size in item.cloth_size.all%}
+                <p>Size:{{size}}</p>
+            {%endfor%}
+        {%endif%}
+
+        <p>Total: {{item.get_total}}</p>
+
+        <a href="{%url 'update-orderItem' item.id %}">Update</a>
+        <a href="{%url 'delete-orderItem' item.id %}">Delete</a>
+
+    {% endfor %}
+    <h5>Total</h5>
+    <p>Total amount: {{order.get_price_total}}</p>
+    <p>Total quantity: {{order.get_qty_total}}</p>
+
+    {% for item in orderItems %}
+        {%if item.shoe_size.all or item.cloth_size.all%}
+            
+            <a href="{%url 'checkout'%}">Checkout</a>
+        {%else%}
+            <p>Add size</p>
+        {%endif%}
+    {% endfor %}
+    
+{%endblock%}

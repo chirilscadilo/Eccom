@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%block content%}
+    <div class="product-card">
+        {%if productObj.product_image%}
+            <img class="img" src="{{productObj.product_image.url}}" alt="">
+        {%endif%}
+        <h5>{{productObj.title}}</h5>
+        <p>{{productObj.description}}</p>
+        <p>{{productObj.price}}</p>
+
+        <form action="{% url 'add-orderItem' productObj.id %}" method="POST">
+            {%csrf_token%}
+            <button type="submit" class="btn btn-secondary" id="add">Add to Card</button>
+            <a href="{% url 'update-card' productObj.id %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'delete-card' productObj.id %}" class="btn btn-secondary">Delete</a>
+        </form>
+        
+    </div>
+{%endblock%}

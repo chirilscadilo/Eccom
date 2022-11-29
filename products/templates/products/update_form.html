@@ -1,0 +1,12 @@
+{%extends 'main.html'%}
+
+{%block content%}
+    
+    <h1>Update Card</h1>
+    <form action="{% url 'update-card' productObj.id %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-secondary">Update</button>
+    </form>
+
+{%endblock%}

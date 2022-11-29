@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%block content%}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%for product in products%}
+    <div class="col">
+        <div class="box">
+            {%if product.product_image%}
+                <img class="img" src="{{product.product_image.url}}" alt="">
+            {%endif%}
+            <hr>
+            <div class="body">
+              <h5 class="title"><strong>{{product.title}}</strong></h5>
+              <p class="price">{{product.price}}$</p>
+              <a href="{% url 'product-card' product.id %}" class="btn btn-secondary" id="details">Details</a>
+              
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    </div>
+{%endblock%}
+
+<!---->

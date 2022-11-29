@@ -1,0 +1,10 @@
+{%extends 'main.html'%}
+{%block content%}
+    <div class="container">
+        <h5>{{profile.username}}'s Account</h5>
+
+        <p><strong>Name:</strong>{{profile.name}}</p>
+        <p><strong>Email:</strong>{{profile.email}}</p>
+    </div>
+    <a href="{%url 'edit-account'%}">Edit</a>
+{%endblock%}

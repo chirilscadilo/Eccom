@@ -1,0 +1,22 @@
+{%extends 'main.html'%}
+
+{%block content%}
+        <p>Add size, edit quantity</p>
+        <form  method="POST">
+            {%csrf_token%}
+
+            {{form_q.as_p}}
+            
+            {%if orderItem.product.is_shoe%}
+                {{form_s.as_p}}
+            {%endif%}
+
+            {%if orderItem.product.is_cloth%}
+                {{form_c.as_p}}
+            {%endif%}
+
+            <button type="submit" class="btn btn-secondary">Add to Card</button>
+        </form>
+        
+
+{%endblock%}

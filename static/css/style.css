@@ -1,0 +1,33 @@
+/*products page*/
+.wrapper {
+    margin: 0 auto; /*0 for top & bottom and auto for left and right*/
+    width: 1000px;
+}
+
+.box {
+    margin-top: 2rem;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.box a{
+    margin-bottom: 1rem;
+}
+
+.title {
+    margin-left: 1rem; 
+}
+
+.price{
+    margin-left: 1rem; 
+}
+
+#details{
+    margin-left: 1rem; 
+}
+
+#add{
+    margin-left: 3px;
+}
+
+/*product-card*/

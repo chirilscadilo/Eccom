@@ -1,0 +1,12 @@
+{%extends 'main.html'%}
+
+{%block content%}
+    
+    <h1>Add a card</h1>
+    <form action="{%url 'create-card'%}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-secondary">Add Card</button>
+    </form>
+
+{%endblock%}
