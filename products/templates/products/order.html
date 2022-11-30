@@ -29,13 +29,6 @@
     <p>Total amount: {{order.get_price_total}}</p>
     <p>Total quantity: {{order.get_qty_total}}</p>
 
-    {% for item in orderItems %}
-        {%if item.shoe_size.all or item.cloth_size.all%}
-            
-            <a href="{%url 'checkout'%}">Checkout</a>
-        {%else%}
-            <p>Add size</p>
-        {%endif%}
-    {% endfor %}
+    <a href="{%url 'checkout' order.id%}">Checkout</a>
     
 {%endblock%}

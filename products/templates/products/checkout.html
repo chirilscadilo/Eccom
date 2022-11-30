@@ -6,8 +6,13 @@
         <p>Address: {{shippingAddress.address}}</p>
         <p>Postal Code: {{shippingAddress.postal_code}}</p>
         <p>Phone: {{shippingAddress.phone}}</p>
+
+        <form action="{%url 'checkout' order.id%}" method="POST">
+            {%csrf_token%}
+            <button type="submit" class="btn btn-secondary" method="POST">Shipout</button>
+        </form>
     {%else%}
-        <a href="">Add Shipping Address</a>
+        <a href="{%url 'add-shippingAddress'%}">Add Shipping Address</a>
     {%endif%}
 
     <h5>Total</h5>

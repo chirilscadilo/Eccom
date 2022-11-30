@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import ProductCard, OrderItem
+from .models import ProductCard, OrderItem, ShippingAddress, Order
 
 class ProductCardForm(ModelForm):
     class Meta:
@@ -55,3 +55,26 @@ class UpdateClothSize(ModelForm):
         widgets = {
             'cloth_size': forms.CheckboxSelectMultiple(),
         }
+
+class AddShippingAddress(ModelForm):
+    class Meta:
+        model = ShippingAddress
+
+        fields = ['address', 'country', 'postal_code', 'phone']
+
+        label = {
+            'postal_code': 'Postal Code'
+        }
+
+        widgets = {
+            'address': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Your Address'}),
+            'country': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Country'}),
+            'postal_code': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Postal Code'}),
+            'phone': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone Number'}),
+        }
+
+class CompleteOrder(ModelForm):
+    class Meta:
+        model = Order
+
+        fields = ['compleated']

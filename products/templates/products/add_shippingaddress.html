@@ -1,0 +1,9 @@
+{%extends 'main.html'%}
+
+{%block content%}
+    <form action="{%url 'add-shippingAddress'%}" method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-secondary">Add Address</button>
+    </form>
+{%endblock%}

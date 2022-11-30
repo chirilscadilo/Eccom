@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import ProductCardForm, UpdateQty, UpdateShoeSize, UpdateClothSize
+from .forms import ProductCardForm, UpdateQty, UpdateShoeSize, UpdateClothSize, AddShippingAddress, CompleteOrder
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -21,7 +21,7 @@ def create_card(request):
 
     if request.method == 'POST':
         form = ProductCardForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             form.save()   
             return redirect('products')
     
@@ -53,10 +53,11 @@ def delete_card(request, pk):
 
 @login_required(login_url='login')
 def order(request):
-    
     customer = request.user.profile
-    order = Order.objects.filter(customer=customer).first()
+
+    order = Order.objects.filter(customer=customer, compleated=False).first()
     orderItems = order.order_items.all()
+    
     
     return render(request, 'products/order.html', {'orderItems':orderItems, 'order':order,})
 
@@ -68,12 +69,13 @@ def add_orderItem(request, pk):
     customer = request.user.profile
     
     if request.method == 'POST':
-        order , created = Order.objects.get_or_create(customer=customer)
+        order , created = Order.objects.get_or_create(customer=customer, compleated=False)
         
         if order.compleated != True:
             orderItem = OrderItem.objects.create(product = productObj, order=order)
             return redirect('products')
-                
+        
+        
     return render(request, 'products/products.html', {})
 
 
@@ -108,9 +110,33 @@ def delete_orderItem(request, pk):
     return render(request, 'products/delete_form.html', {'orderItem':orderItem, 'page':page})
 
 
-def chekout(request):
+def chekout(request, pk):
     customer = request.user.profile
     shippingAddress = ShippingAddress.objects.filter(customer=customer).first()
-    order = Order.objects.filter(customer=customer).first()
+    order = Order.objects.get(id=pk)
+    form = CompleteOrder(instance=order)
+
+    if request.method == 'POST':
+        form = CompleteOrder(request.POST, instance=order)
+        if form.is_valid():
+            order_compleate = form.save(commit=False)
+            order_compleate.compleated = True
+            form.save()
+        return redirect('products')
 
     return render(request,'products/checkout.html', {'shippingAddress':shippingAddress, 'order':order})
+
+
+def add_ShippingAddress(request):
+    customer = request.user.profile
+    form = AddShippingAddress()
+    
+    if request.method == 'POST':
+        form = AddShippingAddress(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.customer = customer
+            address.save()
+            return redirect('checkout')
+    
+    return render (request, 'products/add_shippingaddress.html', {'form':form})
