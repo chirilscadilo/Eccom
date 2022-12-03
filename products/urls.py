@@ -13,5 +13,6 @@ urlpatterns = [
     path('update-orderItem/<str:pk>', views.update_orderItem, name='update-orderItem'),
     path('delete-orderItem/<str:pk>', views.delete_orderItem, name='delete-orderItem'),
     path('checkout/<str:pk>', views.chekout, name='checkout'),
-    path('add-shippingAddress/', views.add_ShippingAddress, name='add-shippingAddress')
+    path('add-shippingAddress/', views.add_ShippingAddress, name='add-shippingAddress'),
+    path('update_shippingaddress/<str:pk>', views.update_ShippingAddress, name='update_shippingAddress'),
 ]

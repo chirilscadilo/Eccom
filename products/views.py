@@ -140,3 +140,18 @@ def add_ShippingAddress(request):
             return redirect('checkout')
     
     return render (request, 'products/add_shippingaddress.html', {'form':form})
+
+
+def update_ShippingAddress(request, pk):
+    shippingAddress = ShippingAddress.objects.get(id=pk)
+    customer = request.user.profile
+    order = Order.objects.filter(customer=customer, compleated=False).first()
+    form = AddShippingAddress(instance=shippingAddress)
+
+    if request.method == 'POST':
+        form = AddShippingAddress(request.POST, instance=shippingAddress)
+        if form.is_valid():
+            form.save()
+            return redirect('checkout' , pk=order.id)
+    
+    return render(request, 'products/update-shippingaddress.html', {'form':form})
