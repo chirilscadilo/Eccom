@@ -30,4 +30,12 @@
     margin-left: 3px;
 }
 
-/*product-card*/
+/*navbar*/
+
+
+#order-icon{
+    width: 40px;
+    display: inline-block;
+    margin: 0 5px 0 15px;
+    
+}
