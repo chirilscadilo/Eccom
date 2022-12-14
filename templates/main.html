@@ -29,15 +29,28 @@
     <title>Ecomm - more than online-shop</title>
   </head>
   <body>
-    {%include 'navbar.html'%} {%if messages%} {% for message in messages %}
-    <div class="alert alert-{{message.tags}}">
-      <!--This is a dinamic message that will take the message from views-->
-      {{message}}
-    </div>
+    <header>
+      {%include 'navbar.html'%} 
 
-    {% endfor %} {%endif%}
+      {%if messages%} 
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+          <!--This is a dinamic message that will take the message from views-->
+          {{message}}
+        </div>
 
-    <div class="wrapper">{%block content%} {%endblock%}</div>
+        {% endfor %} 
+      {%endif%}
+    </header>
+
+    <main>
+      <div class="wrapper">
+        {%block content%} 
+        {%endblock%}
+      </div>
+    </main>
+
+    <footer></footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

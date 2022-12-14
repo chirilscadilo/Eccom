@@ -4,6 +4,8 @@ from .forms import ProductCardForm, UpdateQty, UpdateShoeSize, UpdateClothSize, 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+def header(request):
+    return render(request, 'products/header.html')
 
 def products(request):
     products = ProductCard.objects.all()
@@ -15,6 +17,7 @@ def product_card(request, pk):
     return render(request, 'products/product_card.html', {'productObj':productObj})
 
 
+@login_required(login_url='login')
 def create_card(request):
     form = ProductCardForm()
     page = 'create'
@@ -28,6 +31,7 @@ def create_card(request):
     return render(request,'products/product_form.html', {'form':form, 'page':page,})
 
 
+@login_required(login_url='login')
 def update_card(request, pk):
     page = 'update'
     productObj = ProductCard.objects.get(id=pk)
@@ -42,6 +46,7 @@ def update_card(request, pk):
     return render(request, 'products/update_form.html', {'form':form, 'page':page,'productObj':productObj})
 
 
+@login_required(login_url='login')
 def delete_card(request, pk):
     productObj = ProductCard.objects.get(id=pk)
     page = 'delete_card'
