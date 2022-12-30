@@ -20,7 +20,6 @@ def product_card(request, pk):
 @login_required(login_url='login')
 def create_card(request):
     form = ProductCardForm()
-    page = 'create'
 
     if request.method == 'POST':
         form = ProductCardForm(request.POST, request.FILES)
@@ -28,12 +27,12 @@ def create_card(request):
             form.save()   
             return redirect('products')
     
-    return render(request,'products/product_form.html', {'form':form, 'page':page,})
+    return render(request,'products/product_form.html', {'form':form})
 
 
 @login_required(login_url='login')
 def update_card(request, pk):
-    page = 'update'
+
     productObj = ProductCard.objects.get(id=pk)
     form = ProductCardForm(instance=productObj)
 
@@ -43,7 +42,7 @@ def update_card(request, pk):
             form.save()
             return redirect('product-card', pk=productObj.id) 
 
-    return render(request, 'products/update_form.html', {'form':form, 'page':page,'productObj':productObj})
+    return render(request, 'products/update_form.html', {'form':form,'productObj':productObj})
 
 
 @login_required(login_url='login')
