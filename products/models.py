@@ -57,8 +57,8 @@ class OrderItem(models.Model):
     product = models.ForeignKey(ProductCard, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name="order_items", blank=True)
     quantity = models.IntegerField(default=1, null=True, blank=True)
-    shoe_size = models.ManyToManyField('ShoeSize', blank=True, null=True)
-    cloth_size = models.ManyToManyField('ClothSize', blank=True, null=True)
+    shoe_size = models.ForeignKey('ShoeSize', on_delete=models.SET_NULL, blank=True, null=True)
+    cloth_size = models.ForeignKey('ClothSize', on_delete=models.SET_NULL, blank=True, null=True)
     
     def __str__(self):
         return f'{self.product} - {self.order}'

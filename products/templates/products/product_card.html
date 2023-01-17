@@ -2,20 +2,38 @@
 {% load static %}
 
 {%block content%}
-    <div class="product-card">
-        {%if productObj.product_image%}
-            <img class="img" src="{{productObj.product_image.url}}" alt="">
-        {%endif%}
-        <h5>{{productObj.title}}</h5>
-        <p>{{productObj.description}}</p>
-        <p>{{productObj.price}}</p>
+<div class="wrapper">
+    <div class="row">
+        <div class="col-lg-12">
 
-        <form action="{% url 'add-orderItem' productObj.id %}" method="POST">
-            {%csrf_token%}
-            <button type="submit" class="btn btn-secondary" id="add">Add to Card</button>
-            <a href="{% url 'update-card' productObj.id %}" class="btn btn-secondary">Edit</a>
-            <a href="{% url 'delete-card' productObj.id %}" class="btn btn-secondary">Delete</a>
-        </form>
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{%url 'products' %}">Continue Shopping</a>
+            </div>
+        </div>
         
+        <div class="col-lg-6">
+            <div class="box-element">
+                {%if productObj.product_image%}
+                    <img class="img-cart" src="{{productObj.product_image.url}}" alt="">
+                {%endif%}    
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="box-element">
+                <h5>{{productObj.title}}</h5>
+                <p>{{productObj.description}}</p>
+                <h4 class="price-cart">{{productObj.price}}$</h4>
+            </div>
+
+            <div class="box-element">
+                <form action="{% url 'add-orderItem' productObj.id %}" method="POST">
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-success" id="add">Add to Card</button>
+                    
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 {%endblock%}

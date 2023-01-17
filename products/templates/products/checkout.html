@@ -1,22 +1,53 @@
 {%extends 'main.html'%}
+{% load static %}
 
 {%block content%}
-    {%if shippingAddress%}
-        <p>Shipping Address:</p>
-        <p>Address: {{shippingAddress.address}}</p>
-        <p>Country: {{shippingAddress.country}}</p>
-        <p>Postal Code: {{shippingAddress.postal_code}}</p>
-        <p>Phone: {{shippingAddress.phone}}</p>
+    <div class="wrapper">
+        <div class="col-lg-12">
 
-        <form action="{%url 'checkout' order.id%}" method="POST">
-            {%csrf_token%}
-            <button type="submit" class="btn btn-secondary" method="POST">Shipout</button>
-        </form>
-    {%else%}
-        <a href="{%url 'add-shippingAddress'%}">Add Shipping Address</a>
-    {%endif%}
-    <a href="{%url 'update_shippingAddress' shippingAddress.id %}">Change Address</a>
-    <h5>Total</h5>
-    <p>Total amount: {{order.get_price_total}}</p>
-    <p>Total quantity: {{order.get_qty_total}}</p>
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{%url 'order' %}">Back</a>
+
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        
+                        <th><h5>Total Price <br> <strong>{{order.get_price_total}}</strong></h5></th>
+
+                        <th>  
+                            <form action="{%url 'checkout' order.id%}" method="POST">
+                                {%csrf_token%}
+                                <button id="shipout" type="submit" class="btn btn-success" method="POST">Shipout</button>
+                            </form>
+                        </th>
+                    </tr>
+                </table>
+                
+            </div>
+
+            <div class="box-element">
+                <h5>Customer</h5>
+                <hr>
+                <p>Name <br> <strong>{{customer.name}}</strong></p>
+                <p>Email <br> <strong>{{customer.email}}</strong></p>
+            </div>
+
+            <div class="box-element">
+                {%if shippingAddress%}
+                    <h5>Shipping Address</h5>
+                    <hr>
+                    <p>Address <br> <strong>{{shippingAddress.address}}</strong></p>
+                    <p>Country <br> <strong>{{shippingAddress.country}}</strong></p>
+                    <p>Postal Code <br> <strong>{{shippingAddress.postal_code}}</strong></p>
+                    <p>Phone <br> <strong>{{shippingAddress.phone}}</strong></p>
+
+                    <a class="btn btn-outline-dark" href="{%url 'update_shippingAddress' shippingAddress.id %}">Change Address</a>
+                {%else%}
+                    <a href="{%url 'add-shippingAddress'%}">Add Shipping Address</a>
+                {%endif%}
+            </div>
+        
+        </div>
+    </div>
 {%endblock%}

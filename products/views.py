@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import ProductCardForm, UpdateQty, UpdateShoeSize, UpdateClothSize, AddShippingAddress, CompleteOrder
 from django.contrib.auth.decorators import login_required
+
+#import flash messages
+from django.contrib import messages
+
+
 # Create your views here.
 
 def header(request):
@@ -55,6 +60,17 @@ def delete_card(request, pk):
     return render(request, 'products/delete_form.html', {'productObj':productObj, 'page':page})
 
 
+#checking if size existing before clicking 'Checkout'
+"""
+def check_size(request, pk):
+    customer = request.user.profile
+
+    order = Order.objects.filter(customer=customer, compleated=False).first()
+    orderItems = order.order_items.all()
+
+    return OrderItem.objects.filter().exist()
+"""
+
 @login_required(login_url='login')
 def order(request):
     customer = request.user.profile
@@ -62,7 +78,7 @@ def order(request):
     order = Order.objects.filter(customer=customer, compleated=False).first()
     orderItems = order.order_items.all()
     
-    
+
     return render(request, 'products/order.html', {'orderItems':orderItems, 'order':order,})
 
 
@@ -106,11 +122,13 @@ def update_orderItem(request,pk):
 
 
 def delete_orderItem(request, pk):
+    
+
     orderItem = OrderItem.objects.get(id=pk)
     page = 'delete_order'
     if request.method == 'POST':
         orderItem.delete()
-        return redirect('products')
+        return redirect('order')
     return render(request, 'products/delete_form.html', {'orderItem':orderItem, 'page':page})
 
 
@@ -128,7 +146,7 @@ def chekout(request, pk):
             form.save()
         return redirect('products')
 
-    return render(request,'products/checkout.html', {'shippingAddress':shippingAddress, 'order':order})
+    return render(request,'products/checkout.html', {'shippingAddress':shippingAddress, 'order':order, 'customer':customer})
 
 
 def add_ShippingAddress(request):

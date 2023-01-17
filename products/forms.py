@@ -40,7 +40,7 @@ class UpdateShoeSize(ModelForm):
         }
 
         widgets = {
-            'shoe_size': forms.CheckboxSelectMultiple(),
+            'shoe_size': forms.Select(),
         }
 
 class UpdateClothSize(ModelForm):
@@ -53,7 +53,7 @@ class UpdateClothSize(ModelForm):
         }
 
         widgets = {
-            'cloth_size': forms.CheckboxSelectMultiple(),
+            'cloth_size': forms.Select(),
         }
 
 class AddShippingAddress(ModelForm):

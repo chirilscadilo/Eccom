@@ -1,0 +1,3 @@
+Eccomerce TO DO:
+1. CAnnot press Checkout it no sizes
+2. Display a message if there's no Items in order
