@@ -78,23 +78,29 @@ def order(request):
     order = Order.objects.filter(customer=customer, compleated=False).first()
     orderItems = order.order_items.all()
     
-
     return render(request, 'products/order.html', {'orderItems':orderItems, 'order':order,})
 
 
 @login_required(login_url='login')
 def add_orderItem(request, pk):
     productObj = ProductCard.objects.get(id=pk)
-
     customer = request.user.profile
     
     if request.method == 'POST':
+        
         order , created = Order.objects.get_or_create(customer=customer, compleated=False)
-        
-        if order.compleated != True:
-            orderItem = OrderItem.objects.create(product = productObj, order=order)
+        orderItems = order.order_items.all()
+
+        if order.compleated != True:  
+            #if we add same product twice  
+            for item in orderItems:
+                if item.product.id == productObj.id:
+                    print(item.quantity)
+                    item.quantity +=1
+                    print(item.quantity)
+                else:
+                    orderItem = OrderItem.objects.create(product = productObj, order=order)     
             return redirect('products')
-        
         
     return render(request, 'products/products.html', {})
 

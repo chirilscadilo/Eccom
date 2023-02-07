@@ -13,7 +13,7 @@
                 <table class="table">
                     <tr>
                         
-                        <th><h5>Total Price <br> <strong>{{order.get_price_total}}</strong></h5></th>
+                        <th><h5>Total Price <br> <strong>{{order.get_price_total|floatformat:2}}</strong></h5></th>
 
                         <th>  
                             <form action="{%url 'checkout' order.id%}" method="POST">

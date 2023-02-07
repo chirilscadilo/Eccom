@@ -35,7 +35,7 @@
         <a href="{%url 'order'%}">
           <img id="order-icon" src="{%static 'images/Bag.jpg'%}">
         </a>
-        <p id="order-total">0</p>
+        <p id="order-total">{{request.order.get_qty_total}}</p>
         
       </ul>
 
