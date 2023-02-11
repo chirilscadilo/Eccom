@@ -3,42 +3,58 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" href="{%url 'header'%}">EcomM</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{%url 'products'%}">Store</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{%url 'products'%}"
+            >Store</a
+          >
         </li>
-
       </ul>
 
-      <ul class="navbar-nav ">
-
+      <ul class="navbar-nav">
         {%if not user.is_authenticated%}
         <li>
-          <a class="nav-link active" aria-current="page" href="{%url 'register'%}">Register</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{%url 'register'%}"
+            >Register</a
+          >
         </li>
         <li>
-          <a class="nav-link active" aria-current="page" href="{%url 'login'%}">Login</a>
+          <a class="nav-link active" aria-current="page" href="{%url 'login'%}"
+            >Login</a
+          >
         </li>
-        {%endif%}
-
-        {%if user.is_authenticated%}
+        {%endif%} {%if user.is_authenticated%}
         <li>
-          <a class="nav-link active" aria-current="page" href="{%url 'logout'%}">Logout</a>
-        </li> 
+          <a class="nav-link active" aria-current="page" href="{%url 'logout'%}"
+            >Logout</a
+          >
+        </li>
         {%endif%}
 
         <a href="{%url 'order'%}">
-          <img id="order-icon" src="{%static 'images/Bag.jpg'%}">
+          <img id="order-icon" src="{%static 'images/Bag.jpg'%}" />
         </a>
-        <p id="order-total">{{request.order.get_qty_total}}</p>
-        
-      </ul>
 
+        <!--p id="order-total">{{request.order.get_qty_total}}</p-->
+      </ul>
     </div>
   </div>
 </nav>
