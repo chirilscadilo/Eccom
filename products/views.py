@@ -49,6 +49,7 @@ def products(request):
 
 def product_card(request, pk):
     productObj = ProductCard.objects.get(id=pk)
+    
     return render(request, 'products/product_card.html', {'productObj':productObj})
 
 
