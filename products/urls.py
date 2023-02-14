@@ -4,9 +4,9 @@ from . import views
 urlpatterns = [
     path('', views.header, name='header'),
     path("products/", views.products, name="products"),
-    path('create-card/', views.create_card, name='create-card'),
-    path('update-card/<str:pk>', views.update_card, name='update-card'),
-    path('delete-card/<str:pk>', views.delete_card, name='delete-card'),
+    # path('create-card/', views.create_card, name='create-card'),
+    # path('update-card/<str:pk>', views.update_card, name='update-card'),
+    # path('delete-card/<str:pk>', views.delete_card, name='delete-card'),
     path('product-card/<str:pk>', views.product_card, name='product-card'),
     
     path('order/', views.order, name='order'),

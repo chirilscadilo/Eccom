@@ -16,12 +16,14 @@
                 <hr>
                 
                 <a href="{% url 'product-card' product.id %}" class="btn btn-success" id="details">View</a>
-                <h4 class="price">{{product.price}}$</h4>
+                <h4 class="price">${{product.price}}</h4>
                 
             </div>
         </div>
         {%endfor%}
+        
     </div>
+    
 </div>
 
 {%endblock%}

@@ -3,6 +3,8 @@ from .models import *
 from .forms import ProductCardForm, UpdateQty, UpdateShoeSize, UpdateClothSize, AddShippingAddress, CompleteOrder
 from django.contrib.auth.decorators import login_required
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 #import flash messages
 from django.contrib import messages
 
@@ -14,7 +16,35 @@ def header(request):
 
 def products(request):
     products = ProductCard.objects.all()
-    return render(request, 'products/products.html', {'products':products})
+
+    return render(request, 'products/products.html', {'products':products,})
+
+    # #setting the Paginator
+    # page = request.GET.get('page')
+    # results = 3
+    # paginator = Paginator(products, results)
+
+    # try:
+    #     products = paginator.page(page)
+    # except PageNotAnInteger:
+    #     page = 1
+    #     products = paginator.page(page)
+    # except EmptyPage:
+    #     page = paginator.num_pages
+    #     products = paginator.page(page)
+
+    # leftIndex = (int(page)-4)
+
+    # if leftIndex<1:
+    #     leftIndex = 1
+    # rightIndex = (int(page)+5)
+
+    # if rightIndex > paginator.num_pages:
+    #     rightINdex = paginator.num_pages +1
+    
+    # custom_range = range(leftIndex,rightIndex)
+
+    # return render(request, 'products/products.html', {'products':products, 'paginator':paginator, 'custom_range':custom_range})
 
 
 def product_card(request, pk):
@@ -22,42 +52,42 @@ def product_card(request, pk):
     return render(request, 'products/product_card.html', {'productObj':productObj})
 
 
-@login_required(login_url='login')
-def create_card(request):
-    form = ProductCardForm()
+# @login_required(login_url='login')
+# def create_card(request):
+#     form = ProductCardForm()
 
-    if request.method == 'POST':
-        form = ProductCardForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()   
-            return redirect('products')
+#     if request.method == 'POST':
+#         form = ProductCardForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()   
+#             return redirect('products')
     
-    return render(request,'products/product_form.html', {'form':form})
+#     return render(request,'products/product_form.html', {'form':form})
 
 
-@login_required(login_url='login')
-def update_card(request, pk):
+# @login_required(login_url='login')
+# def update_card(request, pk):
 
-    productObj = ProductCard.objects.get(id=pk)
-    form = ProductCardForm(instance=productObj)
+#     productObj = ProductCard.objects.get(id=pk)
+#     form = ProductCardForm(instance=productObj)
 
-    if request.method == 'POST':
-        form = ProductCardForm(request.POST,request.FILES, instance=productObj)
-        if form.is_valid:
-            form.save()
-            return redirect('product-card', pk=productObj.id) 
+#     if request.method == 'POST':
+#         form = ProductCardForm(request.POST,request.FILES, instance=productObj)
+#         if form.is_valid:
+#             form.save()
+#             return redirect('product-card', pk=productObj.id) 
 
-    return render(request, 'products/update_form.html', {'form':form,'productObj':productObj})
+#     return render(request, 'products/update_form.html', {'form':form,'productObj':productObj})
 
 
-@login_required(login_url='login')
-def delete_card(request, pk):
-    productObj = ProductCard.objects.get(id=pk)
-    page = 'delete_card'
-    if request.method == 'POST':
-        productObj.delete()
-        return redirect('products')
-    return render(request, 'products/delete_form.html', {'productObj':productObj, 'page':page})
+# @login_required(login_url='login')
+# def delete_card(request, pk):
+#     productObj = ProductCard.objects.get(id=pk)
+#     page = 'delete_card'
+#     if request.method == 'POST':
+#         productObj.delete()
+#         return redirect('products')
+#     return render(request, 'products/delete_form.html', {'productObj':productObj, 'page':page})
 
 
 #checking if size existing before clicking 'Checkout'
@@ -87,19 +117,21 @@ def add_orderItem(request, pk):
     customer = request.user.profile
     
     if request.method == 'POST':
-        
+    
         order , created = Order.objects.get_or_create(customer=customer, compleated=False)
+        # OrderItem.objects.create(product = productObj, order=order)
+        # return redirect('products')
         orderItems = order.order_items.all()
-
+        
         if order.compleated != True:  
-            #if we add same product twice  
-            for item in orderItems:
-                if item.product.id == productObj.id:
-                    print(item.quantity)
-                    item.quantity +=1
-                    print(item.quantity)
-                else:
-                    orderItem = OrderItem.objects.create(product = productObj, order=order)     
+            #if we add same product twice 
+            currentProduct = OrderItem.objects.filter(product = productObj, order=order).first() 
+            if currentProduct:
+                print(currentProduct.quantity)
+                currentProduct.quantity +=1
+                print(currentProduct.quantity)
+            else:
+                OrderItem.objects.create(product = productObj, order=order)     
             return redirect('products')
         
     return render(request, 'products/products.html', {})

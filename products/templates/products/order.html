@@ -3,10 +3,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="box-element">
-        <a class="btn btn-outline-dark" href="{%url 'products' %}"
-          >Continue Shopping</a
-        >
-
+        <a class="btn btn-outline-dark" href="{%url 'products' %}">Continue Shopping</a>
         <br />
         <br />
 
@@ -25,9 +22,7 @@
               <a
                 id="checkout"
                 class="btn btn-success"
-                href="{%url 'checkout' order.id%}"
-                >Checkout</a
-              >
+                href="{%url 'checkout' order.id%}">Checkout</a>
             </th>
           </tr>
         </table>
@@ -80,16 +75,8 @@
         </div>
 
         <div class="edit">
-          <a
-            class="btn btn-outline-dark"
-            href="{%url 'update-orderItem' item.id %}"
-            >Edit</a
-          >
-          <a
-            class="btn btn-outline-dark"
-            href="{%url 'delete-orderItem' item.id %}"
-            >Delete</a
-          >
+          <a class="btn btn-outline-dark" href="{%url 'update-orderItem' item.id %}">Edit</a>
+          <a class="btn btn-outline-dark" href="{%url 'delete-orderItem' item.id %}">Delete</a>
         </div>
         {% endfor %}
       </div>
