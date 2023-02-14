@@ -140,4 +140,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['web-production-d22f.up.railway.app'];
+CSRF_TRUSTED_ORIGINS = ['web-production-d22f.up.railway.app']
