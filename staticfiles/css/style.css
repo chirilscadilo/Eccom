@@ -1,0 +1,200 @@
+* {
+  text-decoration: none;
+  
+}
+
+
+body {
+  background-color: #f3f3f3;
+  
+}
+/*products page*/
+.wrapper {
+  margin: 0 auto; /*0 for top & bottom and auto for left and right*/
+  width: 1000px;
+}
+
+.box {
+  margin-top: 2rem;
+  border-style: ridge;
+  border-width: 2px;
+}
+
+.box a {
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin-left: 1rem;
+}
+
+.price {
+  margin-left: 1rem;
+}
+
+#details {
+  margin-left: 1rem;
+}
+
+#add {
+  margin-left: 3px;
+}
+
+/*navbar*/
+
+.navbar {
+  background-color: #8ec3b0 !important;
+}
+
+.navbar-brand {
+  font-family: "Montserrat", sans-serif;
+  color: #ffff00 !important;
+  font-weight: 900;
+  font-style: italic;
+  margin: 0 30px 0 0;
+  display: block;
+}
+
+.nav-link {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.nav-link:hover {
+  color: #f3ecb0 !important;
+}
+
+#order-icon {
+  width: 40px;
+  display: inline-block;
+  margin: 0 5px 0 15px;
+}
+
+#order-total {
+  display: block;
+  text-align: center;
+  color: #fff;
+  background-color: red;
+  width: 20px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+/*Banner*/
+
+.index-banner{
+  width: 100%;
+  height: calc(100vh - 60px);/*100% device height*/
+  background-image: url('/static/images/banner.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  
+  overflow: hidden;
+}
+
+
+.index-banner h2 {
+  font-family: 'Concert One', cursive;
+  font-style: italic;
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 60px;
+  color: #17202A;
+  text-align: center;
+
+  position: relative;
+  top: 250px;
+  left: 240px;
+  
+  
+  text-shadow: 2px 2px 6px #fff;
+}
+
+.index-banner h1 {
+  font-family: 'Concert One', cursive;
+
+  font-size: 28px;
+  font-weight: 100;
+  color: #17202A;
+  text-align: center;
+
+  position: relative;
+  top: 250px;
+  left: 240px;
+  
+  
+  text-shadow: 2px 2px 6px #fff;
+}
+
+
+/*Product list*/
+
+#card{
+  margin-top: 10px;
+}
+
+.box-element{
+  
+  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.img{
+  width: 100%;
+  height: 200px;
+  
+}
+
+.price{
+  display: inline-block;
+  float: right;
+}
+
+/*product view*/
+
+.img-cart{
+  margin-left: 60px;
+}
+
+/*checkout*/
+
+#checkout, #shipout{
+  float: right;
+  margin: 5px;
+}
+
+.cart-row {
+  display: flex;
+  align-items: stretch;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+}
+
+.row-image{
+  width: 100px;
+}
+
+.edit{
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.quantity{
+  display: inline-block;
+  font-weight: 700;
+  padding-right: 10px;
+  margin-bottom: 0;
+}
+
+.chg-quantity{
+  width:12px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 4px;
+}
