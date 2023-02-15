@@ -10,7 +10,7 @@ from django.contrib import messages
 def register(request):
     page = 'register'
     form = UserRegistration()
-    
+
     if request.method == 'POST':
         form = UserRegistration(request.POST)
         if form.is_valid:
@@ -19,7 +19,7 @@ def register(request):
             user.save()
             messages.info(request, 'User account was created!')
             #will login the registred user
-            login(request,user)
+            #login(request,user)
             #will redirect user at the page it was previously
             return redirect(request.GET['next'] if 'next' in request.GET else 'products')#it's redirected either to the previous page that they were, or(else) to product page
         else:
