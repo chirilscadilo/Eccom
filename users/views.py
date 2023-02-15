@@ -13,13 +13,14 @@ def register(request):
 
     if request.method == 'POST':
         form = UserRegistration(request.POST)
-        if form.is_valid:
+        
+        if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()#so the user will not be key sensitive
             user.save()
             messages.info(request, 'User account was created!')
             #will login the registred user
-            #login(request,user)
+            login(request,user)
             #will redirect user at the page it was previously
             return redirect(request.GET['next'] if 'next' in request.GET else 'products')#it's redirected either to the previous page that they were, or(else) to product page
         else:
