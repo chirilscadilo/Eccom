@@ -37,7 +37,7 @@ def loginUser(request):
         return redirect('products')
     
     if request.method == 'POST':
-        print("Data", request.POST)
+        #print("Data", request.POST)
         username = request.POST['username']
         password = request.POST['password']
 
