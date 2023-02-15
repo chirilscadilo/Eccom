@@ -71,14 +71,14 @@ class OrderItem(models.Model):
     
 
 class ShoeSize(models.Model):
-    shoe_size = models.FloatField(default=36.0,null=True, blank=True)
+    shoe_size = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return str(self.shoe_size)
 
 
 class ClothSize(models.Model):
-    cloth_size = models.CharField(max_length = 50, default="S", null=True, blank=True)
+    cloth_size = models.CharField(max_length = 50, null=True, blank=True)
 
     def __str__(self):
         return str(self.cloth_size)

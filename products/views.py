@@ -106,7 +106,7 @@ def check_size(request, pk):
 def order(request):
     customer = request.user.profile
 
-    order = Order.objects.filter(customer=customer, compleated=False).first()
+    order , created = Order.objects.get_or_create(customer=customer, compleated=False)
     orderItems = order.order_items.all()
     
     return render(request, 'products/order.html', {'orderItems':orderItems, 'order':order,})
@@ -118,7 +118,7 @@ def add_orderItem(request, pk):
     customer = request.user.profile
     
     if request.method == 'POST':
-    
+        #print(request.POST)
         order , created = Order.objects.get_or_create(customer=customer, compleated=False)
         # OrderItem.objects.create(product = productObj, order=order)
         # return redirect('products')
@@ -126,13 +126,9 @@ def add_orderItem(request, pk):
         
         if order.compleated != True:  
             #if we add same product twice 
-            currentProduct = OrderItem.objects.filter(product = productObj, order=order).first() 
-            if currentProduct:
-                print(currentProduct.quantity)
-                currentProduct.quantity +=1
-                print(currentProduct.quantity)
-            else:
-                OrderItem.objects.create(product = productObj, order=order)     
+            addedProduct = OrderItem.objects.filter(product=productObj, order=order).first()
+             
+            OrderItem.objects.create(product=productObj, order=order)     
             return redirect('products')
         
     return render(request, 'products/products.html', {})
