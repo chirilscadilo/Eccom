@@ -4,7 +4,7 @@
     <div class="container">
         <form method="POST">
             {%csrf_token%}
-            <p>Do you want to Log out ?</p>
+            <p>Do you want to Log out {{profile.name}}?</p>
             
             <div>
                 <button type="submit" class="btn btn-secondary">Log Out</button>

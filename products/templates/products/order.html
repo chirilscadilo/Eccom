@@ -3,11 +3,9 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="box-element">
-        {%for item in orderItems%}
-          {%if item.shoe_size or item.cloth_size%}
-            <a class="btn btn-outline-dark" href="{%url 'products' %}">Continue Shopping</a>
-          {%endif%}
-        {%endfor%}
+        
+        <a class="btn btn-outline-dark" href="{%url 'products' %}">Continue Shopping</a>
+          
         <br />
         <br />
 
@@ -23,10 +21,12 @@
             </th>
 
             <th>
+              {%if order.get_qty_total%}
               <a
                 id="checkout"
                 class="btn btn-success"
                 href="{%url 'checkout' order.id%}">Checkout</a>
+              {%endif%}
             </th>
           </tr>
         </table>

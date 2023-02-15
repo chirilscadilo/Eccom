@@ -18,7 +18,7 @@ def register(request):
             user = form.save(commit=False)
             user.username = user.username.lower()#so the user will not be key sensitive
             user.save()
-            messages.info(request, 'User account was created!')
+            messages.info(request, f'User account for {user.username} was created!')
             #will login the registred user
             login(request,user)
             #will redirect user at the page it was previously
@@ -60,11 +60,12 @@ def loginUser(request):
 
 
 def logoutUser(request):
+    profile = request.user.profile
     if request.method == 'POST':
         logout(request)
-        messages.info(request, 'User logout!')
+        messages.info(request, f'{profile.name} logout!')
         return redirect('products')
-    return render(request, 'users/logout.html')
+    return render(request, 'users/logout.html', {'profile':profile})
 
 @login_required(login_url='login')
 def account(request):

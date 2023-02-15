@@ -155,7 +155,7 @@ def update_orderItem(request,pk):
    
     return render(request, 'products/update_orderItem.html',{'orderItem':orderItem, 'form_q':form_q, 'form_s':form_s, 'form_c':form_c})
 
-
+@login_required(login_url='login')
 def delete_orderItem(request, pk):
     
 
@@ -166,7 +166,7 @@ def delete_orderItem(request, pk):
         return redirect('order')
     return render(request, 'products/delete_form.html', {'orderItem':orderItem, 'page':page})
 
-
+@login_required(login_url='login')
 def chekout(request, pk):
     customer = request.user.profile
     shippingAddress = ShippingAddress.objects.filter(customer=customer).first()
@@ -184,8 +184,10 @@ def chekout(request, pk):
     return render(request,'products/checkout.html', {'shippingAddress':shippingAddress, 'order':order, 'customer':customer})
 
 
+@login_required(login_url='login')
 def add_ShippingAddress(request):
     customer = request.user.profile
+    order = Order.objects.filter(customer=customer, compleated=False).first()
     form = AddShippingAddress()
     
     if request.method == 'POST':
@@ -194,11 +196,11 @@ def add_ShippingAddress(request):
             address = form.save(commit=False)
             address.customer = customer
             address.save()
-            return redirect('checkout')
+            return redirect('checkout', pk=order.id)
     
     return render (request, 'products/add_shippingaddress.html', {'form':form})
 
-
+@login_required(login_url='login')
 def update_ShippingAddress(request, pk):
     shippingAddress = ShippingAddress.objects.get(id=pk)
     customer = request.user.profile
