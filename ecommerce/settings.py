@@ -143,10 +143,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #ALLOWED_HOSTS = ["web-production-d22f.up.railway.app","chrome-extension://ghbmnnjooekpmoecnnnilnnbdlolhkhi"]
 
 CSRF_TRUSTED_ORIGINS = [('https://web-production-d22f.up.railway.app/')]
-
-# ALLOWED_HOSTS = [
-#     'localhost',
-# ],
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:8000',
-# ]
+ALLOWED_HOSTS = [('https://web-production-d22f.up.railway.app/')]
+CORS_ORIGIN_WHITELIST = [('https://web-production-d22f.up.railway.app/')]
