@@ -144,4 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [('https://web-production-d22f.up.railway.app/')]
 ALLOWED_HOSTS = ['web-production-d22f.up.railway.app', 'localhost', '127.0.0.1']
-CORS_ORIGIN_WHITELIST = ['https://web-production-d22f.up.railway.app/']
+#CORS_ORIGIN_WHITELIST = ['https://web-production-d22f.up.railway.app/']
