@@ -140,4 +140,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ["web-production-d22f.up.railway.app","chrome-extension://ghbmnnjooekpmoecnnnilnnbdlolhkhi"]
+#ALLOWED_HOSTS = ["web-production-d22f.up.railway.app","chrome-extension://ghbmnnjooekpmoecnnnilnnbdlolhkhi"]

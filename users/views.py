@@ -9,6 +9,7 @@ from django.contrib import messages
 # Create your views here.
 def register(request):
     page = 'register'
+    form = UserRegistration()
     
     if request.method == 'POST':
         form = UserRegistration(request.POST)
@@ -21,9 +22,9 @@ def register(request):
             login(request,user)
             #will redirect user at the page it was previously
             return redirect(request.GET['next'] if 'next' in request.GET else 'products')#it's redirected either to the previous page that they were, or(else) to product page
-    else:
-        messages.error(request, 'An error has occured during registration')
-        form = UserRegistration()
+        else:
+            messages.error(request, 'An error has occured during registration')
+            
 
     return render(request, 'users/register_login.html', {'page':page, 'form':form})
 
