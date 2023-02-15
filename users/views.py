@@ -13,7 +13,7 @@ def register(request):
 
     if request.method == 'POST':
         form = UserRegistration(request.POST)
-        
+
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()#so the user will not be key sensitive
@@ -37,6 +37,7 @@ def loginUser(request):
         return redirect('products')
     
     if request.method == 'POST':
+        print("Data", request.POST)
         username = request.POST['username']
         password = request.POST['password']
 
