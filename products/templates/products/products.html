@@ -6,7 +6,7 @@
 <div class="wrapper">
     <div class="row">
         {%for product in products%}
-        <div class="col-lg-3" id="card">
+        <div class="col-lg-3 col-md-4 col-sm-6" id="card">
             {%if product.product_image%}
                     <img class="img" src="{{product.product_image.url}}" alt="">
             {%endif%}
@@ -21,9 +21,7 @@
             </div>
         </div>
         {%endfor%}
-        
-    </div>
-    
+    </div>   
 </div>
 
 {%endblock%}
